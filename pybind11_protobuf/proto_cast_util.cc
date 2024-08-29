@@ -412,7 +412,7 @@ class PythonDescriptorPoolWrapper {
                                    FileDescriptorProto* output) {
 
       return output->ParsePartialFromString(
-          PyBytesAsStringView(py_file_descriptor.attr("serialized_pb")));
+          std::string(PyBytesAsStringView(py_file_descriptor.attr("serialized_pb"))));
     }
 
     py::object pool_;  // never dereferenced.
