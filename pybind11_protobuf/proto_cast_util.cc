@@ -412,7 +412,7 @@ class PythonDescriptorPoolWrapper {
                                    FileDescriptorProto* output) {
 
       return output->ParsePartialFromString(
-          std::string(PyBytesAsStringView(py_file_descriptor.attr("serialized_pb"))));
+          PyBytesAsStringView(py_file_descriptor.attr("serialized_pb")));
     }
 
     py::object pool_;  // never dereferenced.
@@ -424,9 +424,9 @@ class PythonDescriptorPoolWrapper {
 
 }  // namespace
 
-absl::string_view PyBytesAsStringView(py::bytes py_bytes) {
-  return absl::string_view(PyBytes_AsString(py_bytes.ptr()),
-                           PyBytes_Size(py_bytes.ptr()));
+std::string PyBytesAsStringView(py::bytes py_bytes) {
+  return std::string(absl::string_view(PyBytes_AsString(py_bytes.ptr()),
+                           PyBytes_Size(py_bytes.ptr())));
 }
 
 void InitializePybindProtoCastUtil() {
