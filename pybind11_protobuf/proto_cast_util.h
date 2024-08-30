@@ -46,7 +46,7 @@ std::string InferPythonModuleNameFromDescriptorFileName(
 
 // Simple helper. Caller has to ensure that the py_bytes argument outlives the
 // returned string_view.
-absl::string_view PyBytesAsStringView(pybind11::bytes py_bytes);
+std::string PyBytesAsStringView(pybind11::bytes py_bytes);
 
 // Initialize internal proto cast dependencies, which includes importing
 // various protobuf-related modules.
