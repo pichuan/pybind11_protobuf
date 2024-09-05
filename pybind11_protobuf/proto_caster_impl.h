@@ -75,7 +75,7 @@ struct proto_caster_load_impl {
     owned = std::unique_ptr<ProtoType>(new ProtoType());
     value = owned.get();
     return owned.get()->ParsePartialFromString(
-        PyBytesAsStringView(serialized_bytes));
+        std::string(PyBytesAsStringView(serialized_bytes)));
   }
 
   // ensure_owned ensures that the owned member contains a copy of the
@@ -127,7 +127,7 @@ struct proto_caster_load_impl<::google::protobuf::Message> {
             .release()));
     value = owned.get();
     return owned.get()->ParsePartialFromString(
-        PyBytesAsStringView(serialized_bytes));
+        std::string(PyBytesAsStringView(serialized_bytes)));
   }
 
   // ensure_owned ensures that the owned member contains a copy of the
